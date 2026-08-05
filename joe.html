@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Career Connect - Job Portal</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#0f172a;
+}
+
+/* Home Page */
+#home{
+    color:white;
+    text-align:center;
+    margin-top:120px;
+}
+
+#home h1{
+    font-size:42px;
+}
+
+#home p{
+    font-size:20px;
+}
+
+button{
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:12px 25px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1d4ed8;
+}
+
+/* Registration Form */
+#register{
+    display:none;
+}
+
+.container{
+    width:380px;
+    margin:30px auto;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px gray;
+}
+
+h2{
+    text-align:center;
+}
+
+input,select{
+    width:100%;
+    padding:10px;
+    margin:8px 0;
+    box-sizing:border-box;
+}
+
+a{
+    display:block;
+    text-align:center;
+    margin-top:15px;
+    text-decoration:none;
+    color:blue;
+}
+</style>
+
+<script>
+
+function openForm(){
+    document.getElementById("home").style.display="none";
+    document.getElementById("register").style.display="block";
+}
+
+function goHome(){
+    document.getElementById("register").style.display="none";
+    document.getElementById("home").style.display="block";
+}
+
+function validateForm(){
+
+    var name=document.getElementById("name").value.trim();
+    var email=document.getElementById("email").value.trim();
+    var mobile=document.getElementById("mobile").value.trim();
+    var password=document.getElementById("password").value;
+    var resume=document.getElementById("resume").value;
+
+    var namePattern=/^[A-Za-z\s]+$/;
+    var emailPattern=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    var mobilePattern=/^[0-9]{10}$/;
+
+    // Name Validation
+    if(name==""){
+        alert("Enter Full Name");
+        return false;
+    }
+
+    if(!namePattern.test(name)){
+        alert("Name should contain only letters and spaces");
+        return false;
+    }
+
+    // Email Validation
+    if(!emailPattern.test(email)){
+        alert("Enter Valid Email");
+        return false;
+    }
+
+    // Mobile Validation
+    if(!mobilePattern.test(mobile)){
+        alert("Enter Valid 10-digit Mobile Number");
+        return false;
+    }
+
+    // Password Validation
+    if(password.length<6){
+        alert("Password must contain at least 6 characters");
+        return false;
+    }
+
+    // Resume Validation
+    if(resume==""){
+        alert("Upload Resume");
+        return false;
+    }
+
+    alert("Registration Successful");
+    return true;
+}
+
+</script>
+
+</head>
+
+<body>
+
+<!-- Home Page -->
+<div id="home">
+
+    <h1>Career Connect</h1>
+
+    <p>Welcome to the Online Job Portal</p>
+
+    <button onclick="openForm()">Register Now</button>
+
+</div>
+
+<!-- Registration Form -->
+<div id="register">
+
+<div class="container">
+
+<h2>Job Portal Registration</h2>
+
+<form onsubmit="return validateForm()">
+
+    <!-- Name: Only Letters Allowed -->
+    <input
+        type="text"
+        id="name"
+        placeholder="Full Name"
+        oninput="this.value=this.value.replace(/[^A-Za-z\s]/g,'')"
+        required
+    >
+
+    <input
+        type="email"
+        id="email"
+        placeholder="Email ID"
+        required
+    >
+
+    <input
+        type="text"
+        id="mobile"
+        placeholder="Mobile Number"
+        maxlength="10"
+        oninput="this.value=this.value.replace(/[^0-9]/g,'')"
+        required
+    >
+
+    <select required>
+        <option value="">Select Qualification</option>
+        <option>B.E</option>
+        <option>B.Tech</option>
+        <option>MCA</option>
+        <option>MBA</option>
+    </select>
+
+    <select required>
+        <option value="">Select Job Role</option>
+        <option>Software Developer</option>
+        <option>Web Developer</option>
+        <option>Data Analyst</option>
+        <option>AI Engineer</option>
+    </select>
+
+    <input
+        type="number"
+        placeholder="Experience (Years)"
+        min="0"
+        max="50"
+        required
+    >
+
+    <input
+        type="file"
+        id="resume"
+        accept=".pdf,.doc,.docx"
+        required
+    >
+
+    <input
+        type="password"
+        id="password"
+        placeholder="Password"
+        minlength="6"
+        required
+    >
+
+    <br><br>
+
+    <button type="submit">Submit Registration</button>
+
+    <a href="#" onclick="goHome()">Back to Home</a>
+
+</form>
+
+</div>
+
+</div>
+
+</body>
+</html>
